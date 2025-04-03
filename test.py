@@ -1,31 +1,45 @@
 import random
 
-print("Welcome to Rock, Paper, Scissors!")
-options = ["rock", "paper", "scissors"]
-computer_choice = random.choice(options)
+# Define the deck of cards
+suits = ['♠', '♡', '♢', '♣']
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+deck = [(rank, suit) for rank in ranks for suit in suits]
 
-while True:
-    player_choice = input("Enter your choice (rock, paper, or scissors): ")
+# Function to shuffle the deck of cards
+def shuffle_deck():
+    random.shuffle(deck)
 
-    if player_choice not in options:
-        print("Invalid choice. Try again.")
-        continue
+# Function to draw a card from the deck
+def draw_card():
+    return deck.pop(0)
 
-    print("Computer chose:", computer_choice)
-
-    if player_choice == computer_choice:
-        print("Tie!")
-    elif player_choice == "rock" and computer_choice == "scissors":
-        print("You win!")
-    elif player_choice == "paper" and computer_choice == "rock":
-        print("You win!")
-    elif player_choice == "scissors" and computer_choice == "paper":
-        print("You win!")
+# Function to compare the ranks of two cards
+def compare_cards(card1, card2):
+    rank1, _ = card1
+    rank2, _ = card2
+    if ranks.index(rank1) > ranks.index(rank2):
+        return 1
+    elif ranks.index(rank1) < ranks.index(rank2):
+        return -1
     else:
-        print("Computer wins!")
+        return 0
 
-    play_again = input("Do you want to play again? (y/n) ")
-    if play_again != "y":
-        break
+# Shuffle the deck
+shuffle_deck()
 
-    computer_choice = random.choice(options)
+# Draw a card for player 1
+player1_card = draw_card()
+print("Player 1's card:", player1_card[0])
+
+# Draw a card for player 2
+player2_card = draw_card()
+print("Player 2's card:", player2_card[0])
+
+# Compare the ranks of the two cards
+result = compare_cards(player1_card, player2_card)
+if result == 1:
+    print("Player 1 wins!")
+elif result == -1:
+    print("Player 2 wins!")
+else:
+    print("It's a tie!! Good Game!")
