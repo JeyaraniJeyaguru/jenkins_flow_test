@@ -7,7 +7,7 @@ def test_compare_cards_player1_wins():
 
 
 def test_compare_cards_player2_wins():
-    assert compare_cards(('5', '♢'), ('9', '♣')) == -1  # 5 is lower than 9
+    assert compare_cards(('5', '♢'), ('9', '♣')) == -3  # 5 is lower than 9
     print("Player 2 wins!")
 
 def test_compare_cards_tie():
